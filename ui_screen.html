@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Custom Role Builder | Executive Layer HRMS</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#e2e2e2",
+              "outline-variant": "#d1c5ad",
+              "on-secondary-fixed": "#1b1b1b",
+              "surface-dim": "#e1d9c9",
+              "on-tertiary-fixed": "#001f24",
+              "secondary-fixed": "#e2e2e2",
+              "secondary": "#5e5e5e",
+              "on-primary-fixed": "#241a00",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed-variant": "#474747",
+              "background": "#fff9ee",
+              "primary-container": "#cca200",
+              "on-surface": "#1e1b11",
+              "on-surface-variant": "#4e4634",
+              "tertiary-fixed": "#9af0ff",
+              "surface": "#fff9ee",
+              "on-primary-fixed-variant": "#584400",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed-variant": "#004f58",
+              "on-tertiary": "#ffffff",
+              "surface-bright": "#fff9ee",
+              "on-secondary": "#ffffff",
+              "on-error": "#ffffff",
+              "on-background": "#1e1b11",
+              "surface-container-highest": "#e9e2d1",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#ffe08d",
+              "tertiary-container": "#00b8cc",
+              "surface-container-low": "#fbf3e2",
+              "on-secondary-container": "#646464",
+              "tertiary": "#006875",
+              "surface-variant": "#e9e2d1",
+              "on-error-container": "#93000a",
+              "primary-fixed-dim": "#eec130",
+              "primary": "#745b00",
+              "on-primary-container": "#4b3a00",
+              "secondary-fixed-dim": "#c6c6c6",
+              "outline": "#7f7661",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#eec130",
+              "surface-container": "#f5eddc",
+              "on-tertiary-container": "#00434c",
+              "inverse-on-surface": "#f8f0df",
+              "surface-tint": "#745b00",
+              "inverse-surface": "#343025",
+              "surface-container-high": "#efe8d7",
+              "tertiary-fixed-dim": "#05daf2"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #d1c5ad;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed">
+<!-- SideNavBar (Authority: JSON) -->
+<aside class="fixed left-0 top-0 h-screen w-64 z-50 bg-slate-900 dark:bg-slate-950 flex flex-col py-6 h-full shadow-2xl dark:shadow-none">
+<div class="px-6 mb-10 flex items-center gap-3">
+<div class="w-8 h-8 bg-amber-500 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-900" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div>
+<h1 class="text-lg font-manrope font-extrabold text-white leading-none">The Ledger</h1>
+<p class="text-[10px] font-inter font-medium uppercase tracking-widest text-slate-400 mt-1">Institutional HR</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="dashboard">dashboard</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="group">group</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Employee Master</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="work">work</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">ATS/Recruitment</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="calendar_today">calendar_today</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Time &amp; Leave</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="payments">payments</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Payroll Engine</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="lock">lock</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Vault</span>
+</a>
+<a class="flex items-center px-6 py-3 border-l-4 border-amber-500 bg-slate-800/50 text-amber-500 transition-all duration-200 translate-x-1 group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="shield">shield</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Security Settings</span>
+</a>
+</nav>
+<div class="px-6 pt-6 border-t border-slate-800/50">
+<a class="flex items-center py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-xl" data-icon="logout">logout</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopAppBar (Authority: JSON) -->
+<header class="fixed top-0 left-64 right-0 z-40 bg-surface/80 backdrop-blur-md border-b border-slate-200/15 h-16 flex justify-between items-center px-8 shadow-sm">
+<div class="flex items-center gap-6">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 hover:bg-slate-100 transition-colors rounded-lg">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-600 hover:bg-slate-100 transition-colors rounded-lg">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-2"></div>
+<button class="text-sm font-semibold text-amber-600 hover:opacity-80 transition-opacity">Support</button>
+<div class="flex items-center gap-3 ml-2">
+<div class="text-right">
+<p class="text-sm font-manrope font-bold text-slate-900 leading-none">Executive User</p>
+<p class="text-[10px] font-inter text-slate-500 mt-1 uppercase">Administrator</p>
+</div>
+<img class="w-10 h-10 rounded-lg object-cover border-2 border-surface-container-high" data-alt="Executive User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAd1soTiXq1Pfvo8gMnSh2kyDND_usW0zGJsNbzHb3M0VPQYRbdpbmOhSDrOMU_3PWdnjOWTFTmDqVOyGGrYsWD8o2AQREUVkBt0SiWoxjgSR-aoPL5bmKlGfeMamwETdJ-dRJocJwZaRtY8iH015maH0r8_py7GwaLETO_n6BRtIJZhUvVYhi3j6dXZdyAtqQuDcQfjDJ5JqqeRj8nlquzcjpvmI72p3fYq3rIEzc5_RpKo52mjrK0vdGDLYfqeJi95AA1hszbsA"/>
+</div>
+</div>
+</header>
+<!-- Content Body -->
+<div class="pt-24 px-10 pb-12 max-w-7xl mx-auto">
+<!-- Breadcrumbs & Header -->
+<div class="mb-8">
+<div class="flex items-center gap-2 text-[10px] font-inter font-medium uppercase tracking-widest text-on-surface-variant mb-3">
+<a class="hover:text-primary transition-colors" href="#">Security</a>
+<span class="material-symbols-outlined text-[12px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Role Management</a>
+<span class="material-symbols-outlined text-[12px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface">Role Builder</span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<h2 class="text-3xl font-manrope font-extrabold text-on-surface tracking-tight">Custom Role Builder</h2>
+<p class="text-on-surface-variant mt-1 text-sm font-inter">Define granular permissions and data access layers for organizational cohorts.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 bg-surface-container-high text-on-surface font-inter text-sm font-semibold rounded-lg hover:bg-slate-200 transition-colors">Discard Draft</button>
+<button class="px-8 py-2.5 bg-primary text-on-primary font-inter text-sm font-semibold rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">Publish Role</button>
+</div>
+</div>
+</div>
+<!-- Role Config Grid -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Left Column: Identity & Advanced Flags -->
+<div class="col-span-12 lg:col-span-4 space-y-8">
+<!-- Role Identity Card -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm">
+<h3 class="font-manrope font-bold text-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="fingerprint">fingerprint</span>
+                            Role Identity
+                        </h3>
+<div class="space-y-6">
+<div class="group">
+<label class="block text-[10px] font-inter font-bold uppercase tracking-widest text-on-surface-variant mb-2">Role Name</label>
+<input class="w-full bg-surface-container-highest border-none border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-lg p-4 font-manrope font-bold text-on-surface transition-all" placeholder="e.g. Finance Auditor" type="text" value="Regional HR Specialist"/>
+</div>
+<div>
+<label class="block text-[10px] font-inter font-bold uppercase tracking-widest text-on-surface-variant mb-2">Role Description</label>
+<textarea class="w-full bg-surface-container-highest border-none border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-lg p-4 text-sm font-inter text-on-surface resize-none" rows="3">Manages regional compliance, employee lifecycle events, and recruitment for EMEA territory.</textarea>
+</div>
+</div>
+</div>
+<!-- Security Protocols Card -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-sm border border-primary/5">
+<h3 class="font-manrope font-bold text-lg mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="policy">policy</span>
+                            Security Protocols
+                        </h3>
+<div class="space-y-6">
+<!-- Toggle: Data Masking -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg group hover:bg-surface-container transition-colors">
+<div class="max-w-[70%]">
+<p class="text-sm font-manrope font-bold text-on-surface leading-tight">Data Masking</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Hide Financial/Salary Fields from this role across all views.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Toggle: MFA Requirement -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg group hover:bg-surface-container transition-colors">
+<div class="max-w-[70%]">
+<p class="text-sm font-manrope font-bold text-on-surface leading-tight">Enforce MFA</p>
+<p class="text-[11px] text-on-surface-variant mt-1">Require 2FA for every login attempt under this role.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Permission Matrix -->
+<div class="col-span-12 lg:col-span-8">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden border border-outline-variant/10">
+<div class="bg-surface-container-low px-8 py-6 border-b border-outline-variant/15 flex justify-between items-center">
+<div>
+<h3 class="font-manrope font-bold text-lg">Resource Access Matrix</h3>
+<p class="text-[11px] font-inter font-medium uppercase tracking-widest text-on-surface-variant mt-1">Granular CRUD Operation Map</p>
+</div>
+<div class="flex gap-4">
+<span class="flex items-center gap-1.5 text-[10px] font-bold text-primary cursor-pointer hover:underline uppercase">Select All</span>
+<span class="flex items-center gap-1.5 text-[10px] font-bold text-on-surface-variant cursor-pointer hover:underline uppercase">Reset</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-highest/30">
+<th class="px-8 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant border-b border-outline-variant/10">Module / Resource</th>
+<th class="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-center border-b border-outline-variant/10">Create</th>
+<th class="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-center border-b border-outline-variant/10">Read</th>
+<th class="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-center border-b border-outline-variant/10">Update</th>
+<th class="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-center border-b border-outline-variant/10">Delete</th>
+<th class="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-on-surface-variant text-center border-b border-outline-variant/10">Approve</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<!-- Row: Employees -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">badge</span>
+</div>
+<div>
+<p class="text-sm font-manrope font-bold text-on-surface">Employees</p>
+<p class="text-[10px] text-on-surface-variant font-inter">Personal profiles, IDs, Contacts</p>
+</div>
+</div>
+</td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+</tr>
+<!-- Row: Payroll -->
+<tr class="bg-surface-container-low/20 hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div>
+<p class="text-sm font-manrope font-bold text-on-surface">Payroll</p>
+<p class="text-[10px] text-on-surface-variant font-inter">Salary structures, Tax, Bonus</p>
+</div>
+</div>
+</td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+</tr>
+<!-- Row: Assets -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">devices</span>
+</div>
+<div>
+<p class="text-sm font-manrope font-bold text-on-surface">Assets</p>
+<p class="text-[10px] text-on-surface-variant font-inter">Laptops, Mobile, Keycards</p>
+</div>
+</div>
+</td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><span class="text-[8px] font-bold text-on-surface-variant/40">N/A</span></td>
+</tr>
+<!-- Row: ATS -->
+<tr class="bg-surface-container-low/20 hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-tertiary-fixed text-on-tertiary-fixed-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">work</span>
+</div>
+<div>
+<p class="text-sm font-manrope font-bold text-on-surface">ATS</p>
+<p class="text-[10px] text-on-surface-variant font-inter">Job boards, Applicants, Offers</p>
+</div>
+</div>
+</td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+</tr>
+<!-- Row: Performance -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-surface-variant text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<div>
+<p class="text-sm font-manrope font-bold text-on-surface">Performance</p>
+<p class="text-[10px] text-on-surface-variant font-inter">Reviews, Feedback, OKRs</p>
+</div>
+</div>
+</td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input checked="" class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+<td class="text-center px-4"><input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" type="checkbox"/></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="bg-surface-container-highest/20 px-8 py-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="info">info</span>
+<p class="text-[11px] text-on-surface-variant">Changes to this role will affect <strong>14 active users</strong> immediately.</p>
+</div>
+<p class="text-[11px] font-bold text-on-surface-variant uppercase tracking-tighter">Last synced: 2m ago</p>
+</div>
+</div>
+<!-- Visual Summary / Status Info -->
+<div class="mt-8 p-6 bg-tertiary-container/10 rounded-xl flex items-center gap-6 border border-tertiary-container/20">
+<div class="w-12 h-12 bg-tertiary-container rounded-full flex items-center justify-center text-on-tertiary-container shadow-inner">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-manrope font-bold text-on-tertiary-container">Authority Tier: Level 3 (Regional Management)</h4>
+<p class="text-xs text-on-tertiary-container/80 mt-0.5">This role includes signature authority for payroll cycles up to $50,000 and full ATS pipeline management.</p>
+</div>
+<button class="px-4 py-2 bg-on-tertiary-container text-tertiary-fixed rounded-lg text-[10px] font-bold uppercase tracking-wider hover:opacity-90 transition-opacity">View Audit Logs</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Authority: JSON - Suppressed on Details/Settings logic) -->
+<!-- Suppressed as this is a focused Task/Settings page per JSON Hierarchy Rules -->
+</body></html>

@@ -1,0 +1,1 @@
+﻿src/app/api/vault/upload/route.ts(29,11): error TS2353: Object literal may only specify known properties, and 'category' does not exist in type 'Without<TemplateDocumentCreateInput, TemplateDocumentUncheckedCreateInput> & TemplateDocumentUncheckedCreateInput'.

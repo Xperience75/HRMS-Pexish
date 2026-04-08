@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Trail | Executive Layer HRMS</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-container": "#e2e2e2",
+              "outline-variant": "#d1c5ad",
+              "on-secondary-fixed": "#1b1b1b",
+              "surface-dim": "#e1d9c9",
+              "on-tertiary-fixed": "#001f24",
+              "secondary-fixed": "#e2e2e2",
+              "secondary": "#5e5e5e",
+              "on-primary-fixed": "#241a00",
+              "error-container": "#ffdad6",
+              "on-secondary-fixed-variant": "#474747",
+              "background": "#fff9ee",
+              "primary-container": "#cca200",
+              "on-surface": "#1e1b11",
+              "on-surface-variant": "#4e4634",
+              "tertiary-fixed": "#9af0ff",
+              "surface": "#fff9ee",
+              "on-primary-fixed-variant": "#584400",
+              "error": "#ba1a1a",
+              "on-tertiary-fixed-variant": "#004f58",
+              "on-tertiary": "#ffffff",
+              "surface-bright": "#fff9ee",
+              "on-secondary": "#ffffff",
+              "on-error": "#ffffff",
+              "on-background": "#1e1b11",
+              "surface-container-highest": "#e9e2d1",
+              "surface-container-lowest": "#ffffff",
+              "primary-fixed": "#ffe08d",
+              "tertiary-container": "#00b8cc",
+              "surface-container-low": "#fbf3e2",
+              "on-secondary-container": "#646464",
+              "tertiary": "#006875",
+              "surface-variant": "#e9e2d1",
+              "on-error-container": "#93000a",
+              "primary-fixed-dim": "#eec130",
+              "primary": "#745b00",
+              "on-primary-container": "#4b3a00",
+              "secondary-fixed-dim": "#c6c6c6",
+              "outline": "#7f7661",
+              "on-primary": "#ffffff",
+              "inverse-primary": "#eec130",
+              "surface-container": "#f5eddc",
+              "on-tertiary-container": "#00434c",
+              "inverse-on-surface": "#f8f0df",
+              "surface-tint": "#745b00",
+              "inverse-surface": "#343025",
+              "surface-container-high": "#efe8d7",
+              "tertiary-fixed-dim": "#05daf2"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden">
+<!-- Sidebar Navigation -->
+<aside class="fixed left-0 top-0 h-screen w-64 z-50 bg-slate-900 dark:bg-slate-950 flex flex-col py-6 shadow-2xl">
+<div class="px-6 mb-10">
+<h1 class="text-lg font-manrope font-extrabold text-white">The Ledger</h1>
+<p class="text-[10px] uppercase tracking-[0.2em] text-amber-500 font-bold mt-1">Institutional HR</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="dashboard">dashboard</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Dashboard</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="group">group</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Employee Master</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="work">work</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">ATS/Recruitment</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="calendar_today">calendar_today</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Time &amp; Leave</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="payments">payments</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Payroll Engine</span>
+</a>
+<a class="flex items-center px-6 py-3 text-slate-400 hover:text-slate-200 hover:bg-slate-800/30 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="lock">lock</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Vault</span>
+</a>
+<!-- Active Navigation -->
+<a class="flex items-center px-6 py-3 border-l-4 border-amber-500 bg-slate-800/50 text-amber-500 translate-x-1 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="shield" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Security Settings</span>
+</a>
+</nav>
+<div class="px-6 mt-auto">
+<a class="flex items-center py-3 text-slate-400 hover:text-slate-200 transition-all duration-200" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" data-icon="logout">logout</span>
+<span class="font-inter text-xs font-medium uppercase tracking-widest">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Top Bar -->
+<header class="fixed top-0 left-64 right-0 h-16 z-40 bg-surface/80 backdrop-blur-md border-b border-slate-200/15 flex items-center justify-between px-8 shadow-sm">
+<div class="flex items-center gap-4">
+<span class="font-manrope font-bold text-slate-900 text-xl tracking-tight">Executive Audit Trail</span>
+<span class="h-4 w-[1px] bg-slate-300"></span>
+<span class="text-xs font-inter font-medium text-slate-500 tracking-wider uppercase">System Integrity Logs</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative group">
+<span class="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-100 p-2 rounded-full transition-colors" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-amber-500 rounded-full border-2 border-surface"></span>
+</div>
+<span class="material-symbols-outlined text-slate-600 cursor-pointer hover:bg-slate-100 p-2 rounded-full transition-colors" data-icon="settings">settings</span>
+<div class="flex items-center gap-3 pl-4 border-l border-slate-200">
+<div class="text-right">
+<p class="text-sm font-bold font-manrope text-slate-900 leading-none">Jameson Thorne</p>
+<p class="text-[10px] font-inter text-amber-600 font-bold uppercase tracking-tighter">Chief Security Officer</p>
+</div>
+<img alt="Executive User Profile" class="w-9 h-9 rounded-lg object-cover ring-2 ring-amber-100" data-alt="Portrait of a professional executive male" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy7DOa80B9ntMoN7m7Nph8BuhcT3GSVj23PiNxWXf2hAFvJIGKAw9ognIKYqCrytvSqOTX8lA28iFqhJvjTiaI3Xn_cHOaM0jDwjyDXj5MgW2YZBu5N_1f5nm1QrR6bAbDBd5GlzEu0RGPJ6PJSVdfAVZpynEtYUeZBKHfQ-BIk46ctKQTYRZsx6ZwRzRj1MjErqssPksLIUiXT62Tx5JOibKLSkBdzRUhYmSkaW3i2RhpbkFm1O3VJkfTqAvmY6L3QYlsxdTX1zI"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-8 min-h-screen">
+<!-- Action Header & Filters -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-1">
+<h2 class="text-3xl font-manrope font-extrabold text-on-surface tracking-tight">System Event Ledger</h2>
+<p class="text-on-surface-variant text-sm font-body">Real-time forensic monitoring of the Executive Layer architecture.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-highest text-on-surface-variant font-label text-sm font-bold rounded-lg border border-transparent hover:border-outline-variant transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+                    Advanced Filters
+                </button>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-on-primary font-label text-sm font-bold rounded-lg shadow-md hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-lg" data-icon="picture_as_pdf">picture_as_pdf</span>
+                    Export to PDF
+                </button>
+</div>
+</div>
+<!-- Metric Bento Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container-low p-5 rounded-xl border-l-4 border-amber-500 shadow-sm">
+<p class="text-[10px] font-inter uppercase tracking-widest text-on-surface-variant font-bold mb-1">Critical Events (24h)</p>
+<p class="text-2xl font-manrope font-extrabold text-on-surface">14</p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-xl border-l-4 border-tertiary shadow-sm">
+<p class="text-[10px] font-inter uppercase tracking-widest text-on-surface-variant font-bold mb-1">Active Administrators</p>
+<p class="text-2xl font-manrope font-extrabold text-on-surface">06</p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-xl border-l-4 border-outline shadow-sm">
+<p class="text-[10px] font-inter uppercase tracking-widest text-on-surface-variant font-bold mb-1">Ledger Integrity</p>
+<p class="text-2xl font-manrope font-extrabold text-tertiary">100% Verified</p>
+</div>
+<div class="bg-surface-container-low p-5 rounded-xl border-l-4 border-slate-900 shadow-sm">
+<p class="text-[10px] font-inter uppercase tracking-widest text-on-surface-variant font-bold mb-1">Total Logs Indexed</p>
+<p class="text-2xl font-manrope font-extrabold text-on-surface">2.4M</p>
+</div>
+</div>
+<!-- Audit Table Container -->
+<div class="bg-surface-container-lowest rounded-xl shadow-lg overflow-hidden border border-slate-200/50">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low">
+<th class="px-6 py-4 text-[11px] font-inter font-extrabold text-on-surface-variant uppercase tracking-widest">Date &amp; Time</th>
+<th class="px-6 py-4 text-[11px] font-inter font-extrabold text-on-surface-variant uppercase tracking-widest">Operator</th>
+<th class="px-6 py-4 text-[11px] font-inter font-extrabold text-on-surface-variant uppercase tracking-widest">IP Address</th>
+<th class="px-6 py-4 text-[11px] font-inter font-extrabold text-on-surface-variant uppercase tracking-widest">Target ID</th>
+<th class="px-6 py-4 text-[11px] font-inter font-extrabold text-on-surface-variant uppercase tracking-widest">Action</th>
+<th class="px-6 py-4 text-[11px] font-inter font-extrabold text-on-surface-variant uppercase tracking-widest">Version History Changes</th>
+<th class="px-6 py-4 text-[11px] font-inter font-extrabold text-on-surface-variant uppercase tracking-widest text-right">Details</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<p class="text-sm font-manrope font-bold text-on-surface">Oct 24, 2023</p>
+<p class="text-[11px] font-inter text-slate-500">14:22:15 UTC</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-slate-900 text-[10px] flex items-center justify-center text-white font-bold">AS</div>
+<p class="text-sm font-medium text-on-surface">A. Sterling</p>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-slate-600">192.168.1.104</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold rounded font-mono">PAY-7729-X</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide bg-tertiary-container text-on-tertiary-container">
+                                    Payroll Update
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="text-xs space-y-1">
+<span class="text-error line-through decoration-red-300">base_salary: 125000</span>
+<span class="block text-tertiary font-bold">base_salary: 142000</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-low/30 hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<p class="text-sm font-manrope font-bold text-on-surface">Oct 24, 2023</p>
+<p class="text-[11px] font-inter text-slate-500">11:05:42 UTC</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-amber-600 text-[10px] flex items-center justify-center text-white font-bold">JT</div>
+<p class="text-sm font-medium text-on-surface">J. Thorne</p>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-slate-600">45.23.112.9</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold rounded font-mono">SEC-CFG-99</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide bg-amber-100 text-amber-800">
+                                    Policy Change
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="text-xs space-y-1">
+<span class="text-slate-500 italic">2FA bypass enabled for testing phase...</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<p class="text-sm font-manrope font-bold text-on-surface">Oct 23, 2023</p>
+<p class="text-[11px] font-inter text-slate-500">23:59:01 UTC</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-red-800 text-[10px] flex items-center justify-center text-white font-bold">SYS</div>
+<p class="text-sm font-medium text-on-surface">System Kernel</p>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-slate-600">Localhost</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold rounded font-mono">DB-SYNC-01</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide bg-blue-100 text-blue-800">
+                                    Auto Archive
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="text-xs space-y-1">
+<span class="block text-slate-700">6,422 entries moved to vault storage</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="open_in_new">open_in_new</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-low/30 hover:bg-slate-50/50 transition-colors group">
+<td class="px-6 py-4">
+<p class="text-sm font-manrope font-bold text-on-surface">Oct 23, 2023</p>
+<p class="text-[11px] font-inter text-slate-500">18:44:20 UTC</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-slate-900 text-[10px] flex items-center justify-center text-white font-bold">ML</div>
+<p class="text-sm font-medium text-on-surface">M. Lowery</p>
+</div>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-slate-600">172.16.254.1</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant text-[10px] font-bold rounded font-mono">USR-882-EE</span>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wide bg-error-container text-on-error-container">
+                                    Access Denied
+                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="text-xs space-y-1">
+<span class="text-error font-bold italic">Unauthorized attempt on restricted payroll module</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="report">report</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- High Density Pagination -->
+<div class="bg-surface-container-low border-t border-slate-200/50 px-6 py-4 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<p class="text-[11px] font-inter font-bold text-on-surface-variant uppercase tracking-widest">Showing 1-25 of 2,422,901 logs</p>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-inter text-slate-500 font-bold">Items per page:</span>
+<select class="bg-transparent border-none text-[10px] font-bold text-on-surface focus:ring-0 cursor-pointer">
+<option>25</option>
+<option>50</option>
+<option>100</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded text-slate-400 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="first_page">first_page</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded text-slate-400 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+</button>
+<div class="flex items-center px-4 gap-4">
+<span class="w-7 h-7 flex items-center justify-center rounded bg-primary text-on-primary text-xs font-bold">1</span>
+<span class="text-xs font-bold text-on-surface-variant cursor-pointer hover:text-primary transition-colors">2</span>
+<span class="text-xs font-bold text-on-surface-variant cursor-pointer hover:text-primary transition-colors">3</span>
+<span class="text-xs font-bold text-on-surface-variant">...</span>
+<span class="text-xs font-bold text-on-surface-variant cursor-pointer hover:text-primary transition-colors">48k</span>
+</div>
+<button class="w-8 h-8 flex items-center justify-center rounded text-slate-600 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded text-slate-600 hover:bg-slate-200 transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="last_page">last_page</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer / Integrity Status -->
+<footer class="mt-12 flex items-center justify-between border-t border-slate-200 pt-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="verified_user">verified_user</span>
+<p class="text-[11px] font-inter text-slate-500 leading-tight">
+<span class="font-bold text-slate-700 block uppercase">Blockchain Verifiable Ledger</span>
+                    Block Hash: 0x82f...a921 | Verified by Executive Node 04
+                </p>
+</div>
+<p class="text-[10px] font-inter text-slate-400">Executive Layer v4.2.0 • Institutional Security Protocol Active</p>
+</footer>
+</main>
+</body></html>

@@ -1,0 +1,316 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AdvanceRequest {
+  id          String   @id
+  tenantId    String
+  employeeId  String
+  amount      Float
+  status      String
+  requestDate DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  Employee    Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  Tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([employeeId])
+  @@index([tenantId])
+}
+
+model AttendanceRecord {
+  id              String   @id
+  tenantId        String
+  employeeId      String
+  date            DateTime
+  status          String
+  deductionQueued Boolean  @default(false)
+  recordedByIp    String?
+  timestamp       DateTime @default(now())
+  Employee        Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  Tenant          Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([employeeId, date])
+  @@index([date])
+  @@index([tenantId])
+}
+
+model AuditLog {
+  id             String   @id
+  tenantId       String
+  actorUserId    String?
+  targetEntityId String
+  actionType     String
+  previousData   Json?
+  newData        Json?
+  ipAddress      String?
+  timestamp      DateTime @default(now())
+  User           User?    @relation(fields: [actorUserId], references: [id])
+  Tenant         Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([actorUserId])
+  @@index([targetEntityId])
+  @@index([tenantId])
+}
+
+model Branch {
+  id                    String   @id
+  tenantId              String
+  name                  String
+  location              String
+  dataInheritanceLinked Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime
+  Tenant                Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  User                  User[]
+
+  @@unique([name, tenantId])
+  @@index([tenantId])
+}
+
+model Department {
+  id        String   @id
+  tenantId  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  Tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  User      User[]
+
+  @@unique([name, tenantId])
+  @@index([tenantId])
+}
+
+model Employee {
+  id                 String             @id
+  tenantId           String
+  firstName          String
+  lastName           String
+  email              String
+  nin                String?
+  bloodGroup         String?
+  guarantorVerified  Boolean            @default(false)
+  userId             String?            @unique
+  createdAt          DateTime           @default(now())
+  updatedAt          DateTime
+  confidence         Float?
+  matchScore         Int?
+  skills             Json               @default("[]")
+  grossSalary        Float              @default(0)
+  bankAccount        String?
+  allergies          String?
+  applyPensionRelief Boolean            @default(true)
+  applyRentRelief    Boolean            @default(true)
+  genotype           String?
+  hmoPlan            String?
+  lga                String?
+  maritalStatus      String?
+  mobile2            String?
+  nationality        String?
+  permanentAddress   String?
+  pfaName            String?
+  pfaNumber          String?
+  stateOfOrigin      String?
+  accountName        String?
+  accountType        String?
+  bankName           String?
+  educationHistory   Json?
+  employmentHistory  Json?
+  jtbTin             String?
+  lirsPayerId        String?
+  maidenName         String?
+  nokAddress         String?
+  nokEmail           String?
+  nokName            String?
+  nokPhone           String?
+  nokRelationship    String?
+  placeOfBirth       String?
+  referees           Json?
+  title              String?
+  AdvanceRequest     AdvanceRequest[]
+  AttendanceRecord   AttendanceRecord[]
+  Tenant             Tenant             @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  User               User?              @relation(fields: [userId], references: [id])
+
+  @@index([tenantId])
+}
+
+model Role {
+  id          String   @id
+  tenantId    String
+  name        String
+  description String?
+  permissions Json     @default("[]")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  Tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  User        User[]
+
+  @@unique([name, tenantId])
+  @@index([tenantId])
+}
+
+model TemplateDocument {
+  id         String       @id @default(uuid())
+  tenantId   String
+  name       String
+  type       TemplateType
+  storageUrl String
+  parsedTags Json         @default("[]")
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  Tenant     Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+}
+
+model Tenant {
+  id                  String                @id
+  name                String
+  slug                String                @unique
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime
+  isActive            Boolean               @default(true)
+  subscriptionPlan    String                @default("ENTERPRISE")
+  workweekDivisor     Int                   @default(5)
+  AdvanceRequest      AdvanceRequest[]
+  AttendanceRecord    AttendanceRecord[]
+  AuditLog            AuditLog[]
+  Branch              Branch[]
+  Department          Department[]
+  Employee            Employee[]
+  Role                Role[]
+  TemplateDocument    TemplateDocument[]
+  TenantSetting       TenantSetting?
+  TerminatedAbsconder TerminatedAbsconder[]
+  User                User[]
+  JobRequisition      JobRequisition[]
+  Candidate           Candidate[]
+  BlacklistVault      BlacklistVault[]
+}
+
+model TenantSetting {
+  id                      String   @id
+  tenantId                String   @unique
+  advanceMaxPercentage    Int      @default(30)
+  advanceCutoffDay        Int      @default(12)
+  advanceRequireGuarantor Boolean  @default(true)
+  workingDaysConfig       Json     @default("[]")
+  financeExportEmails     String[]
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime
+  Tenant                  Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+model TerminatedAbsconder {
+  id        String   @id
+  tenantId  String
+  nin       String
+  email     String
+  createdAt DateTime @default(now())
+  Tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([email, tenantId])
+  @@unique([nin, tenantId])
+  @@index([tenantId])
+}
+
+model User {
+  id           String      @id
+  tenantId     String
+  email        String
+  passwordHash String
+  firstName    String
+  lastName     String
+  isActive     Boolean     @default(true)
+  roleId       String
+  departmentId String?
+  branchId     String?
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime
+  AuditLog     AuditLog[]
+  Employee     Employee?
+  Branch       Branch?     @relation(fields: [branchId], references: [id])
+  Department   Department? @relation(fields: [departmentId], references: [id])
+  Role         Role        @relation(fields: [roleId], references: [id])
+  Tenant       Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([email, tenantId])
+  @@index([tenantId])
+}
+
+enum TemplateType {
+  CONTRACT
+  JD
+  KPI
+  OFFER_LETTER
+  DISCIPLINARY
+  POLICY
+  OTHER
+}
+
+model JobRequisition {
+  id        String   @id @default(uuid())
+  tenantId  String
+  title     String
+  status    JobStatus @default(ACTIVE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  Candidate Candidate[]
+
+  @@index([tenantId])
+}
+
+model Candidate {
+  id           String         @id @default(uuid())
+  tenantId     String
+  jobId        String
+  fullName     String
+  email        String
+  nin          String?
+  matchScore   Int?
+  stage        CandidateStage @default(SOURCED)
+  outreachSent Boolean        @default(false)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  JobRequisition JobRequisition @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  Tenant       Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([jobId])
+}
+
+model BlacklistVault {
+  id        String   @id @default(uuid())
+  tenantId  String
+  nin       String?
+  email     String?
+  reason    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([nin])
+  @@index([email])
+}
+
+enum JobStatus {
+  ACTIVE
+  CLOSED
+}
+
+enum CandidateStage {
+  SOURCED
+  SCREENED
+  INTERVIEWING
+  OFFERED
+  REJECTED
+}
+

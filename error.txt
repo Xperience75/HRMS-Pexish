@@ -1,0 +1,19 @@
+PrismaClientInitializationError: 
+Invalid `prisma.tenant.upsert()` invocation in
+C:\Users\Acer\OneDrive\Desktop\Peter I. W\AI\enterprise-hrms-saas-v2\prisma\seed.ts:8:38
+
+  5 async function main() {
+  6   console.log("Seeding database...");
+  7   
+→ 8   const tenant = await prisma.tenant.upsert(
+Can't reach database server at `ep-floral-union-ampcnc10-pooler.c-5.us-east-1.aws.neon.tech:5432`
+
+Please make sure your database server is running at `ep-floral-union-ampcnc10-pooler.c-5.us-east-1.aws.neon.tech:5432`.
+    at Un.handleRequestError (C:\Users\Acer\OneDrive\Desktop\Peter I. W\AI\enterprise-hrms-saas-v2\node_modules\@prisma\client\runtime\library.js:121:7748)
+    at Un.handleAndLogRequestError (C:\Users\Acer\OneDrive\Desktop\Peter I. W\AI\enterprise-hrms-saas-v2\node_modules\@prisma\client\runtime\library.js:121:6771)
+    at Un.request (C:\Users\Acer\OneDrive\Desktop\Peter I. W\AI\enterprise-hrms-saas-v2\node_modules\@prisma\client\runtime\library.js:121:6478)
+    at async l (C:\Users\Acer\OneDrive\Desktop\Peter I. W\AI\enterprise-hrms-saas-v2\node_modules\@prisma\client\runtime\library.js:130:9644)
+    at async main (C:\Users\Acer\OneDrive\Desktop\Peter I. W\AI\enterprise-hrms-saas-v2\prisma\seed.ts:8:18) {
+  clientVersion: '6.4.1',
+  errorCode: undefined
+}
