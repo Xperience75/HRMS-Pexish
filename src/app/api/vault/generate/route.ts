@@ -3,6 +3,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+export const dynamic = "force-dynamic";
+
 // TARGET 2: The "Smart Fetch" Tag Dictionary
 const TAG_DICTIONARY = [
   "EMPLOYEE_FULL_NAME",

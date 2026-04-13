@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { withAuditLog } from "@/lib/api-middleware";
 
+export const dynamic = "force-dynamic";
+
 // Example Controller Logic to Create a Branch
 async function createBranchHandler(req: NextRequest) {
   try {

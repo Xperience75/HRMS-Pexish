@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = "force-dynamic";
+
 // Mock S3 Upload Hook
 async function uploadToS3(fileBuffer: Buffer, fileName: string, mimeType: string, tenantId: string, context: 'cvs' | 'employee_docs') {
   // S3 Cryptographic Isolation conceptually represented by unique pathing:

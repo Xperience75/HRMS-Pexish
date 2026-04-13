@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = "force-dynamic";
+
 // Placeholder ID Card Trigger
 async function generateVirtualID(employeeId: string, name: string, bloodGroup: string | null) {
   // Overlays candidate's data onto an SVG/Canvas layout
