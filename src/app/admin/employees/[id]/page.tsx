@@ -8,11 +8,11 @@ export default async function EmployeeVaultPage({ params }: { params: Promise<{ 
   const employee = await prisma.employee.findUnique({
     where: { id },
     include: {
-      user: {
+      User: {
         include: {
-          role: true,
-          department: true,
-          branch: true
+          Role: true,
+          Department: true,
+          Branch: true
         }
       }
     }

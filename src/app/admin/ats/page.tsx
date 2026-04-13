@@ -3,6 +3,7 @@ import ATSPipelineClient from "./client";
 
 const prisma = new PrismaClient();
 
+export const dynamic = "force-dynamic";
 export default async function ATSPipelinePage() {
   // Using a consistent mock tenantId for testing as per standard setup
   const tenantId = "mock-tenant-id"; 

@@ -16,6 +16,8 @@ export async function POST(request: Request) {
     // Instantiate Employee with nested User relational bindings
     const employee = await prisma.employee.create({
       data: {
+        id: crypto.randomUUID(),
+        updatedAt: new Date(),
         firstName,
         lastName,
         email,
@@ -24,16 +26,18 @@ export async function POST(request: Request) {
         guarantorVerified,
         grossSalary,
         bankAccount,
-        tenant: { connect: { id: tenantId } },
-        user: {
+        Tenant: { connect: { id: tenantId } },
+        User: {
           create: {
+            id: crypto.randomUUID(),
+            updatedAt: new Date(),
             firstName,
             lastName,
             email,
             passwordHash: "pending-setup",
-            tenant: { connect: { id: tenantId } },
-            role: { connect: { id: designation } },
-            branch: { connect: { id: assignedBranch } }
+            Tenant: { connect: { id: tenantId } },
+            Role: { connect: { id: designation } },
+            Branch: { connect: { id: assignedBranch } }
           }
         }
       }

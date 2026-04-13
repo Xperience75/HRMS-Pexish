@@ -8,7 +8,7 @@ export default async function AttendancePage() {
 
   const employees = await prisma.employee.findMany({
     where: { tenantId: currentTenantId },
-    include: { user: { include: { role: true, branch: true } } },
+    include: { User: { include: { Role: true, Branch: true } } },
     orderBy: { firstName: 'asc' }
   });
 

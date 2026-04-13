@@ -4,8 +4,8 @@ export async function calculatePayroll(tenantId: string, monthDate: Date) {
   const employees = await prisma.employee.findMany({
     where: { tenantId },
     include: {
-      user: { include: { branch: true } },
-      attendanceRecords: {
+      User: { include: { Branch: true } },
+      AttendanceRecord: {
         where: {
           date: {
             gte: new Date(monthDate.getFullYear(), monthDate.getMonth(), 1),
@@ -13,7 +13,7 @@ export async function calculatePayroll(tenantId: string, monthDate: Date) {
           }
         }
       },
-      advanceRequests: {
+      AdvanceRequest: {
         where: {
           status: "APPROVED"
         }
@@ -35,7 +35,7 @@ export async function calculatePayroll(tenantId: string, monthDate: Date) {
 
   const results = employees.map(emp => {
     // 1. DYNAMIC DIVISOR (Working Days)
-    const branchName = emp.user?.branch?.name?.toUpperCase() || "";
+    const branchName = emp.User?.Branch?.name?.toUpperCase() || "";
     let workingDays = daysInMonth;
     if (branchName.includes("HEADQUARTERS") || branchName === "HQ") {
       workingDays = daysInMonth - weekends;
@@ -45,7 +45,7 @@ export async function calculatePayroll(tenantId: string, monthDate: Date) {
 
     const grossSalary = emp.grossSalary || 0;
     const dailyRate = workingDays > 0 ? (grossSalary / workingDays) : 0;
-    const unauthorizedAbsenceCount = emp.attendanceRecords.filter(r => r.status === "ABSENT_UNAUTHORIZED").length;
+    const unauthorizedAbsenceCount = emp.AttendanceRecord.filter(r => r.status === "ABSENT_UNAUTHORIZED").length;
     let earnedGross = Math.max(0, grossSalary - (unauthorizedAbsenceCount * dailyRate));
 
     // 2. THE TIER-2 SALARY SPLIT (BHT = 65%)
@@ -101,7 +101,7 @@ export async function calculatePayroll(tenantId: string, monthDate: Date) {
     }
 
     const monthlyPayeTax = annualTax / 12;
-    const advancesRepaid = emp.advanceRequests.reduce((sum, adv) => sum + adv.amount, 0);
+    const advancesRepaid = emp.AdvanceRequest.reduce((sum, adv) => sum + adv.amount, 0);
     const finalNetPay = earnedGross - (pensionEnabled ? (bhtTotal * 0.08) : 0) - monthlyPayeTax - advancesRepaid;
 
     return {

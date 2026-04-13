@@ -40,7 +40,9 @@ export async function publishGlobalSettings(formData: {
         financeExportEmails: emailsArray,
       },
       create: {
+        id: crypto.randomUUID(),
         tenantId,
+        updatedAt: new Date(),
         advanceMaxPercentage,
         advanceCutoffDay,
         advanceRequireGuarantor: enforceHardLock,
@@ -52,6 +54,7 @@ export async function publishGlobalSettings(formData: {
     // 4. Trigger Immutable Audit Trail Record natively within Server Action
     await prisma.auditLog.create({
       data: {
+        id: crypto.randomUUID(),
         tenantId,
         actorUserId: "SYSTEM_ADMIN",
         targetEntityId: settings.id,

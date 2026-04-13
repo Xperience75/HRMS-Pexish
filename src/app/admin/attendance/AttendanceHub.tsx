@@ -12,7 +12,7 @@ export default function AttendanceHub({ initialEmployees, branches }: { initialE
 
   // Filter employees
   const employees = initialEmployees.filter((emp: any) => 
-    branchId ? emp.user?.branchId === branchId : true
+    branchId ? emp.User?.branchId === branchId : true
   );
 
   const handleStatusChange = (employeeId: string, status: string) => {
@@ -111,7 +111,7 @@ export default function AttendanceHub({ initialEmployees, branches }: { initialE
                   <tr key={emp.id} className={`${idx % 2 === 0 ? 'bg-white' : 'bg-slate-50/50'} hover:bg-slate-100 transition-colors`}>
                     <td className="py-2.5 px-6 font-semibold text-xs text-slate-700 font-['Inter']">EMP-{emp.id.substring(0,6).toUpperCase()}</td>
                     <td className="py-2.5 px-6 text-sm text-[#0f172a] font-extrabold font-['Manrope']">{emp.firstName} {emp.lastName}</td>
-                    <td className="py-2.5 px-6 text-xs text-slate-600 font-medium">{emp.user?.role?.name || "Unassigned"}</td>
+                    <td className="py-2.5 px-6 text-xs text-slate-600 font-medium">{emp.User?.Role?.name || "Unassigned"}</td>
                     <td className="py-2.5 px-6">
                       <div className="flex gap-1.5 items-center">
                         <button onClick={() => handleStatusChange(emp.id, "PRESENT")} 

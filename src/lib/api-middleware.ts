@@ -60,6 +60,7 @@ export function withAuditLog(handler: ApiHandler, actionPrefix: string) {
         
         await prisma.auditLog.create({
           data: {
+            id: crypto.randomUUID(),
             tenantId,
             actorUserId,
             targetEntityId,

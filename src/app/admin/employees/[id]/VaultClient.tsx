@@ -83,10 +83,10 @@ export default function VaultClient({ employee }: { employee: any }) {
               </div>
               <p className="text-slate-500 font-medium mb-4 flex items-center justify-center md:justify-start gap-2">
                 <span className="material-symbols-outlined text-sm">work</span>
-                {employee.user?.role?.name || employee.user?.department?.name || "Unassigned Designation"}
+                {employee.User?.Role?.name || employee.User?.Department?.name || "Unassigned Designation"}
                 <span className="mx-2 text-slate-300">|</span>
                 <span className="material-symbols-outlined text-sm">domain</span>
-                {employee.user?.branch?.name || "Global / HQ"}
+                {employee.User?.Branch?.name || "Global / HQ"}
               </p>
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
                 <div className="flex items-center gap-1.5 text-sm text-slate-600 bg-slate-50 px-3 py-1.5 rounded-md border border-slate-200">

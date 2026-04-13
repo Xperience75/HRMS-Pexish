@@ -14,16 +14,19 @@ export async function createRole(formData: {
   try {
     const newRole = await prisma.role.create({
       data: {
+        id: crypto.randomUUID(),
         name,
         description,
         permissions,
         tenantId, // Assuming passed from the UI/session
+        updatedAt: new Date(),
       },
     });
 
     // Dummy audit log since this isn't via API
     await prisma.auditLog.create({
       data: {
+        id: crypto.randomUUID(),
         tenantId,
         actorUserId: "SYSTEM", // Mock
         targetEntityId: newRole.id,

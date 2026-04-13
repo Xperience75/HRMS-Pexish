@@ -29,11 +29,11 @@ export async function POST(req: Request) {
     const employee = await prisma.employee.findUnique({
       where: { id: employeeId },
       include: {
-        tenant: true,
-        user: {
+        Tenant: true,
+        User: {
           include: {
-            branch: true,
-            role: true
+            Branch: true,
+            Role: true
           }
         }
       }
@@ -63,9 +63,9 @@ export async function POST(req: Request) {
     const basicSalary = (employee.grossSalary * 0.35).toFixed(2);
     
     // Fallbacks
-    const branchName = employee.user?.branch?.name || "Corporate HQ";
-    const designation = employee.title || employee.user?.role?.name || "Staff";
-    const companyName = employee.tenant?.name || "Acme Corporation";
+    const branchName = employee.User?.Branch?.name || "Corporate HQ";
+    const designation = employee.title || employee.User?.Role?.name || "Staff";
+    const companyName = employee.Tenant?.name || "Acme Corporation";
 
     const mappedData: Record<string, string> = {
       EMPLOYEE_FULL_NAME: `${employee.firstName} ${employee.lastName}`,

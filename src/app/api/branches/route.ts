@@ -23,10 +23,12 @@ async function createBranchHandler(req: NextRequest) {
     // Insert Branch into PostgreSQL Database using Prisma
     const branch = await prisma.branch.create({
       data: {
+        id: crypto.randomUUID(),
         tenantId,
         name,
         location,
         dataInheritanceLinked: dataInheritanceLinked ?? true,
+        updatedAt: new Date(),
       },
     });
 

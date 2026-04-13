@@ -41,10 +41,12 @@ export async function POST(request: Request) {
     // Create the Advance Request
     const advance = await prisma.advanceRequest.create({
       data: {
+        id: crypto.randomUUID(),
         tenantId,
         employeeId,
         amount: parsedAmount,
         status: "PENDING",
+        updatedAt: new Date(),
       }
     });
 

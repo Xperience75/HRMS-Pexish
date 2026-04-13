@@ -33,6 +33,7 @@ export async function POST(request: Request) {
             deductionQueued: status === 'ABSENT_UNAUTHORIZED'
           },
           create: {
+            id: crypto.randomUUID(),
             tenantId,
             employeeId,
             date: attendanceDate,

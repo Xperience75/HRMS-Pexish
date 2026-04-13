@@ -11,10 +11,10 @@ export default async function EmployeeMasterPage() {
   const employees = await prisma.employee.findMany({
     where: { tenantId: currentTenantId },
     include: {
-      user: {
+      User: {
         include: {
-          role: true,
-          branch: true
+          Role: true,
+          Branch: true
         }
       }
     },
@@ -89,8 +89,8 @@ export default async function EmployeeMasterPage() {
             ) : (
               employees.map((emp) => {
                 // Determine mock role/branch status based on relations
-                const designation = emp.user?.role?.name || "Unassigned";
-                const location = emp.user?.branch?.name || "Corporate HQ";
+                const designation = emp.User?.Role?.name || "Unassigned";
+                const location = emp.User?.Branch?.name || "Corporate HQ";
                 const isSuspended = emp.guarantorVerified === false; // Example hook
                 
                 return (
