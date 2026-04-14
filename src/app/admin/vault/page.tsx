@@ -2,6 +2,7 @@ import React from "react";
 import UploadButtonAndModal from "./UploadButtonAndModal";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
 export default async function CentralTemplateVaultPage() {
   const tenantId = "mock-tenant-id";
   const uniqueRolesData = await prisma.role.findMany({

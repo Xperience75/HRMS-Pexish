@@ -3,8 +3,6 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const dynamic = "force-dynamic";
-
 export async function POST(req: NextRequest) {
   try {
     const formData = await req.formData();

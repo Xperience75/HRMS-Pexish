@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { calculatePayroll } from "@/lib/payroll/engine";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
 export default async function PayrollPage() {
   const defaultTenant = await prisma.tenant.findFirst();
   let payrollData: any[] = [];

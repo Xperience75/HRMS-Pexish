@@ -3,8 +3,6 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const dynamic = "force-dynamic";
-
 // Omnichannel Triggers Mock Implementation
 async function dispatchPreInterview(name: string, email: string, phone: string | undefined) {
   // Payload for SMTP (SendGrid)
